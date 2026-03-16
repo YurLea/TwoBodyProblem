@@ -379,7 +379,6 @@ function updateStats() {
     Тел: <b>${bodies.length}</b><br>
     μ = ${state.mu.toFixed(3)}<br>
     dt = ${state.dt.toFixed(4)}<br>
-    Масштаб: ${state.scale} px / unit
   `;
 }
 
