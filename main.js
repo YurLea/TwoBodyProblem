@@ -13,6 +13,10 @@ const ui = {
     pauseBtn: document.getElementById('pauseBtn'),
     removeLastBtn: document.getElementById('removeLastBtn'),
     clearBtn: document.getElementById('clearBtn'),
+    helpBtn: document.getElementById('helpBtn'),
+    helpOverlay: document.getElementById('helpOverlay'),
+    helpCloseBtn: document.getElementById('helpCloseBtn'),
+    helpOkBtn: document.getElementById('helpOkBtn'),
     stats: document.getElementById('stats')
 };
 
@@ -501,6 +505,14 @@ function animate(now) {
     requestAnimationFrame(animate);
 }
 
+function openHelpModal() {
+    ui.helpOverlay.classList.remove('hidden');
+}
+
+function closeHelpModal() {
+    ui.helpOverlay.classList.add('hidden');
+}
+
 function init() {
     resizeCanvas();
     applySettings();
@@ -532,6 +544,22 @@ function init() {
     canvas.addEventListener('pointercancel', cancelDrag);
 
     requestAnimationFrame(animate);
+
+    ui.helpBtn.addEventListener('click', openHelpModal);
+    ui.helpCloseBtn.addEventListener('click', closeHelpModal);
+    ui.helpOkBtn.addEventListener('click', closeHelpModal);
+
+    ui.helpOverlay.addEventListener('click', (event) => {
+        if (event.target === ui.helpOverlay) {
+            closeHelpModal();
+        }
+    });
+
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && !ui.helpOverlay.classList.contains('hidden')) {
+            closeHelpModal();
+        }
+    });
 }
 
 init();
